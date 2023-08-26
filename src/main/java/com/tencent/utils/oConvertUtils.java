@@ -1,4 +1,4 @@
-package com.tencent.unity;
+package com.tencent.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -660,7 +660,7 @@ public class oConvertUtils {
 		String json = "";
 		try {
 			//换个写法，解决springboot读取jar包中文件的问题
-			InputStream stream = com.tencent.unity.oConvertUtils.class.getClassLoader().getResourceAsStream(url.replace("classpath:", ""));
+			InputStream stream = com.tencent.utils.oConvertUtils.class.getClassLoader().getResourceAsStream(url.replace("classpath:", ""));
 			json = IOUtils.toString(stream,"UTF-8");
 		} catch (IOException e) {
 			log.error(e.getMessage(),e);
