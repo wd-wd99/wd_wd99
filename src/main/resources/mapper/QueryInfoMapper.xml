@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.wxcloudrun.mapper.QueryInfoMapper">
+    <resultMap type="com.tencent.wxcloudrun.entity.QueryInfo" id="QueryInfoResult">
+        <result property="id"    column="id"    />
+        <result property="searcherName"    column="searcher_name"    />
+        <result property="searcherPhone"    column="searcher_phone"    />
+        <result property="auditeeName"    column="auditee_name"    />
+        <result property="auditeeId"    column="auditee_id"    />
+        <result property="affiliatedCompany"    column="affiliated_company"    />
+        <result property="queryPurpose"    column="query_purpose"    />
+        <result property="queryResult"    column="query_result"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <insert id="insertQueryInfo" parameterType="com.tencent.wxcloudrun.entity.QueryInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into query_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="searcherName != null">searcher_name,</if>
+            <if test="searcherPhone != null">searcher_phone,</if>
+            <if test="auditeeName != null">auditee_name,</if>
+            <if test="auditeeId != null">auditee_id,</if>
+            <if test="affiliatedCompany != null">affiliated_company,</if>
+            <if test="queryPurpose != null">query_purpose,</if>
+            <if test="queryResult != null">query_result,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="searcherName != null">#{searcherName},</if>
+            <if test="searcherPhone != null">#{searcherPhone},</if>
+            <if test="auditeeName != null">#{auditeeName},</if>
+            <if test="auditeeId != null">#{auditeeId},</if>
+            <if test="affiliatedCompany != null">#{affiliatedCompany},</if>
+            <if test="queryPurpose != null">#{queryPurpose},</if>
+            <if test="queryResult != null">#{queryResult},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+</mapper>

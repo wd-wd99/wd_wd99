@@ -1,17 +1,89 @@
 server:
   port: 80
+  tomcat:
+    max-swallow-size: -1
+  error:
+    include-exception: true
+    include-stacktrace: ALWAYS
+    include-message: ALWAYS
+  servlet:
+    context-path: /shenji
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,httptrace
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+    mail:
+      host: smtp.163.com
+      username: jeecgos@163.com
+      password: ??
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+              required: true
+    #json 时间戳统一转换
+    jackson:
+      date-format:   yyyy-MM-dd HH:mm:ss
+      time-zone:   GMT+8
+    jpa:
+      open-in-view: false
+    activiti:
+      check-process-definitions: false
+      #启用作业执行器
+      async-executor-activate: false
+      #启用异步执行器
+      job-executor-activate: false
+    aop:
+      proxy-target-class: true
+    #配置freemarker
+    freemarker:
+      # 设置模板后缀名
+      suffix: .ftl
+      # 设置文档类型
+      content-type: text/html
+      # 设置页面编码格式
+      charset: UTF-8
+      # 设置页面缓存
+      cache: false
+      prefer-file-system-access: false
+      # 设置ftl文件路径
+      template-loader-path:
+        - classpath:/templates
+    # 设置静态文件路径，js,css等
+    mvc:
+      static-path-pattern: /**
+    resource:
+      static-locations: classpath:/static/,classpath:/public/
+    autoconfigure:
+      exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
-    username: ${MYSQL_USERNAME}
-    password: ${MySQL_PASSWORD}
-  mvc:
-    view:
-      suffix: .html
-      prefix: /
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
+        username: ${MYSQL_USERNAME}
+        password: ${MySQL_PASSWORD}
+#    url: jdbc:mysql://10.10.130.188:3306/shenji_test?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: luke.luke
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    validationQuery: SELECT 1
+#  mvc:
+#    view:
+#      suffix: .html
+#      prefix: /
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
